@@ -1,6 +1,8 @@
 # Open Hazard Map
+
 An open, locale-agnostic **GeoJSON data standard** and a free, open-source **reference Progressive Web App (PWA)** for mapping traffic hazards on children's routes to school.
-**Status: early stage / work in progress.** The schema below is a draft and will change. No stable release yet.
+
+> **Status: early stage / work in progress.** The schema below is a draft and will change. No stable release yet.
 
 ## Why
 
@@ -19,7 +21,8 @@ This is a *proposed draft standard* from an independent author. It is not an off
 
 - **Open and free:** no proprietary map APIs, no license fees, no vendor lock-in.
 - **Facts separate from opinion:** objectively observable attributes (marked crossing, sidewalk, lighting, posted speed limit) are stored separately from subjective, citizen-rated severity, plus a `verified_by_authority` flag. Different countries can apply their own criteria on a shared factual base.
-- **Child data protection:** no personal data is collected, reports are anonymous, and each record has a `visibility` level (`public`, `school_only`, `municipality_only`) enforced by role-based access control.
+- **Child data protection and digital safety:** no personal data is collected, reports are anonymous, no photos in the first version (avoids location metadata leaks), hazard points describe roads and never homes or individual routes, and each record has a `visibility` level (`public`, `school_only`, `municipality_only`) enforced by role-based access control.
+- **Security basics:** HTTPS only, input validation, rate limiting, least-privilege moderator access, regular dependency updates and backups, and a published privacy and security note.
 - **Local-first:** the map and hazard data are cached on the device and work offline.
 - **OpenStreetMap-friendly:** built on OpenStreetMap data and tagging conventions, with the aim of proposing useful extensions back to the OSM community.
 
@@ -32,6 +35,7 @@ This is a *proposed draft standard* from an independent author. It is not an off
   "properties": {
     "schema_version": "0.1",
     "hazard_type": "unmarked_crossing",
+    "affected_road_user": ["pedestrian", "cyclist", "scooter"],
     "severity": 3,
     "has_marked_crossing": false,
     "has_sidewalk": true,
@@ -47,6 +51,7 @@ This is a *proposed draft standard* from an independent author. It is not an off
 Hazard types and other categorical fields will use controlled, translatable enumerations. A JSON Schema file for validation will be published with the first versioned release.
 
 ## Planned technology
+
 - PostgreSQL + PostGIS
 - Node.js, Express, TypeScript
 - React, Vite, Tailwind CSS
@@ -56,6 +61,7 @@ Hazard types and other categorical fields will use controlled, translatable enum
 All components are free and open source.
 
 ## Roadmap
+
 1. **Standard definition:** versioned GeoJSON schema, JSON Schema validation files, documentation, example datasets, mapping to OSM tags.
 2. **Reference app, map:** offline-capable PWA with a read-only map of hazard points.
 3. **Reporting and moderation:** anonymous reporting, moderator panel, PostGIS backend, validated GeoJSON export.
@@ -63,12 +69,14 @@ All components are free and open source.
 Later ideas (not committed): school pilot and moderator hand-over, educational material, proposing schema extensions to OpenStreetMap.
 
 ## Contributing
+
 Feedback on the schema is especially welcome, from road-safety practitioners, schools, municipalities, OpenStreetMap contributors and developers. Please open an issue to discuss ideas or problems.
 
 ## License
+
 - **Code:** [MIT](LICENSE)
 - **Schema documentation:** CC-BY 4.0
 
 ## Author
-Vladan Čolić, Trstenik, Serbia.
 
+Vladan Čolić, Trstenik, Serbia.
